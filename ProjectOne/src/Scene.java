@@ -37,7 +37,7 @@ public class Scene {
         System.out.println("Outcome: " + outcomes[choice - 1]); //outcome resulting from choice
 
         int pointsChange = outcomes[choice - 1];
-        //Based on the outcome, it either adds or subtracts points from the player's score using the Game object provided as an argument.
+        //either add or deduct points from the player's score
         if (pointsChange > 0) {
             game.addPoints(pointsChange);
             System.out.println("You gained " + pointsChange + " points.");

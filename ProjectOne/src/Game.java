@@ -22,8 +22,9 @@ public class Game {
 
     // methods/getters/setters
     // lets start the game
-    public void startGame() {
-        Scanner scanner = new Scanner(System.in);
+    public void startGame(Scanner scanner) {
+        // Scanner scanner = new Scanner(System.in);
+        // as long game is not over- between 0 and 25
         while (currentSceneIndex < scenes.size() && points > 0 && points < 25) {
             Scene currentScene = scenes.get(currentSceneIndex);
             currentScene.displayScene();
@@ -33,12 +34,15 @@ public class Game {
 
             currentSceneIndex++;
         }
-        scanner.close();
-
+        // scanner.close();
+        // win, lose or safe
         if (points >= 25) {
-            System.out.println("Congratulations! You've won the game!");
+            System.out.println("Congrats! You've won the game!");
+        } else if (points <= 0) {
+            System.out.println("You've lost the game. Be kinder next!");
         } else {
-            System.out.println("You've lost the game. Better luck next time!");
+            System.out.println(
+                    "Congrats on making it to the survivor zone but you didn't save enough lives to win the game");
         }
     }
 
@@ -50,10 +54,11 @@ public class Game {
         this.points += points;
     }
 
+    // Guard clause- points negative after subtraction?
     public void subtractPoints(int points) {
         this.points -= points;
         if (this.points < 0) {
-            this.points = 0;
+            this.points = 0; // if total points are negative, set them to 0
         }
     }
 
@@ -79,14 +84,14 @@ public class Game {
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 scanner.nextLine();
-                if (choice >= 1 && choice <= maxChoice) {
+                if (choice >= 1 && choice <= maxChoice) { // input 1,2,3
                     break;
                 } else {
                     System.out.println("Invalid choice. Please enter a number between 1 and " + maxChoice);
                 }
             } else {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.next();
+                scanner.nextLine();
             }
             scanner.close();
         }
